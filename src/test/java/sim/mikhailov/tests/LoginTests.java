@@ -10,7 +10,7 @@ import sim.mikhailov.tests.pages.MainPage;
 import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 
-public class LoginTests {
+public class LoginTests extends TestBase{
     LoginPage loginPage = new LoginPage();
     MainPage mainPage = new MainPage();
 

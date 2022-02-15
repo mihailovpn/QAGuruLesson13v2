@@ -17,4 +17,10 @@ public class LoginPage {
     public void enterLoginButton() {
         Selenide.$(loginButtonLocator).click();
     }
+
+    public void logIn() {
+        enterLoginName();
+        enterLoginPass();
+        enterLoginButton();
+    }
 }
