@@ -16,12 +16,9 @@ public class LoginTests extends TestBase{
     MainPage mainPage = new MainPage();
 
     @Test
-    @Feature("MainPage")
+    @Feature("LoginPage")
     @DisplayName("Check log in elements")
     void loginElementsTests() {
-        step("Open url " + loginPage.url, () ->
-                open(loginPage.url));
-
         step("Check label for login input", () ->
                 Selenide.$(loginPage.usernameLabelLocator).
                         shouldHave(Condition.text("Телефон  /  Email  /  СНИЛС")));
@@ -36,8 +33,6 @@ public class LoginTests extends TestBase{
     //@AllureId("5892")
     @DisplayName("Successful log in test user")
     void loginTests() {
-        step("Open url " + loginPage.url, () ->
-                open(loginPage.url));
 
         step("Enter login name", () ->
                 loginPage.enterCorrectUsername());
@@ -49,7 +44,7 @@ public class LoginTests extends TestBase{
                 loginPage.enterLogInButton());
 
         step("Check successfully Log in", () ->
-                Selenide.$(mainPage.userNameLocator).shouldHave(Condition.text(mainPage.userName)));
+                Selenide.$(mainPage.userNameLocator).shouldHave(Condition.text(mainPage.userNameText)));
     }
 
     @Test
@@ -57,9 +52,6 @@ public class LoginTests extends TestBase{
     //@AllureId("5892")
     @DisplayName("Can't log in with incorrect username")
     void loginWithIncorrectUsernameTests() {
-        step("Open url " + loginPage.url, () ->
-                open(loginPage.url));
-
         step("Enter login name", () ->
                 loginPage.enterIncorrectUsername());
 
@@ -78,9 +70,6 @@ public class LoginTests extends TestBase{
     //@AllureId("5892")
     @DisplayName("Can't log in with incorrect password")
     void loginWithIncorrectPasswordTests() {
-        step("Open url " + loginPage.url, () ->
-                open(loginPage.url));
-
         step("Enter login name", () ->
                 loginPage.enterCorrectUsername());
 
