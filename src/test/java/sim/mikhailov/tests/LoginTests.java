@@ -55,7 +55,7 @@ public class LoginTests extends TestBase{
     @Test
     @Feature("LoginPage")
     //@AllureId("5892")
-    @DisplayName("Can't log in with incorrect user name")
+    @DisplayName("Can't log in with incorrect username")
     void loginWithIncorrectUsernameTests() {
         step("Open url " + loginPage.url, () ->
                 open(loginPage.url));
@@ -65,6 +65,27 @@ public class LoginTests extends TestBase{
 
         step("Enter login password", () ->
                 loginPage.enterCorrectPassword());
+
+        step("Enter login button", () ->
+                loginPage.enterLogInButton());
+
+        step("Check successfully Log in", () ->
+                Selenide.$(loginPage.errorLogInLocator).shouldHave(Condition.text(loginPage.errorLogInText)));
+    }
+
+    @Test
+    @Feature("LoginPage")
+    //@AllureId("5892")
+    @DisplayName("Can't log in with incorrect password")
+    void loginWithIncorrectPasswordTests() {
+        step("Open url " + loginPage.url, () ->
+                open(loginPage.url));
+
+        step("Enter login name", () ->
+                loginPage.enterCorrectUsername());
+
+        step("Enter login password", () ->
+                loginPage.enterIncorrectPassword());
 
         step("Enter login button", () ->
                 loginPage.enterLogInButton());
