@@ -7,7 +7,5 @@ public class MainPage {
     public String userName = " ФАМИЛИЯ006 И. О. ";
     public String userNameLocator = ".user-name";
 
-    public void checkUserName() {
-        Selenide.$(userNameLocator).shouldHave(Condition.text(userName));
-    }
+
 }

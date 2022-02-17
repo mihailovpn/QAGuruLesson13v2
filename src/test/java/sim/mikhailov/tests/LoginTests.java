@@ -1,6 +1,7 @@
 package sim.mikhailov.tests;
 
-import io.qameta.allure.AllureId;
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Feature;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,22 +17,61 @@ public class LoginTests extends TestBase{
 
     @Test
     @Feature("MainPage")
-    @AllureId("5892")
-    @DisplayName("Login test user")
-    void LoginTest() {
+    @DisplayName("Check log in elements")
+    void loginElementsTests() {
+        step("Open url " + loginPage.url, () ->
+                open(loginPage.url));
+
+        step("Check label for login input", () ->
+                Selenide.$(loginPage.usernameLabelLocator).
+                        shouldHave(Condition.text("Телефон  /  Email  /  СНИЛС")));
+
+        step("Check label for login password", () ->
+                Selenide.$(loginPage.passwordLabelLocator).
+                        shouldHave(Condition.text("Пароль")));
+    }
+
+    @Test
+    @Feature("LoginPage")
+    //@AllureId("5892")
+    @DisplayName("Successful log in test user")
+    void loginTests() {
         step("Open url " + loginPage.url, () ->
                 open(loginPage.url));
 
         step("Enter login name", () ->
-                loginPage.enterLoginName());
+                loginPage.enterCorrectUsername());
 
         step("Enter login password", () ->
-                loginPage.enterLoginPass());
+                loginPage.enterCorrectPassword());
 
         step("Enter login button", () ->
-                loginPage.enterLoginButton());
+                loginPage.enterLogInButton());
 
         step("Check successfully Log in", () ->
-                mainPage.checkUserName());
+                Selenide.$(mainPage.userNameLocator).shouldHave(Condition.text(mainPage.userName)));
     }
+
+    @Test
+    @Feature("LoginPage")
+    //@AllureId("5892")
+    @DisplayName("Can't log in with incorrect user name")
+    void loginWithIncorrectUsernameTests() {
+        step("Open url " + loginPage.url, () ->
+                open(loginPage.url));
+
+        step("Enter login name", () ->
+                loginPage.enterIncorrectUsername());
+
+        step("Enter login password", () ->
+                loginPage.enterCorrectPassword());
+
+        step("Enter login button", () ->
+                loginPage.enterLogInButton());
+
+        step("Check successfully Log in", () ->
+                Selenide.$(loginPage.errorLogInLocator).shouldHave(Condition.text(loginPage.errorLogInText)));
+    }
+
+
 }

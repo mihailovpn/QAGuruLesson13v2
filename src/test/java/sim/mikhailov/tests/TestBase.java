@@ -2,6 +2,7 @@ package sim.mikhailov.tests;
 
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 
 public class TestBase {
@@ -11,5 +12,10 @@ public class TestBase {
 
     @AfterAll
     static void takeScreenshot() {
+    }
+
+    @AfterEach
+    void clearCache() {
+        Selenide.webdriver().driver().clearCookies();
     }
 }
