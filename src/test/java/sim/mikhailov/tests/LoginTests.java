@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import sim.mikhailov.tests.pages.LoginPage;
 import sim.mikhailov.tests.pages.MainPage;
 
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 
@@ -20,11 +21,11 @@ public class LoginTests extends TestBase{
     @DisplayName("Check log in elements")
     void loginElementsTests() {
         step("Check label for login input", () ->
-                Selenide.$(loginPage.usernameLabelLocator).
+                $(loginPage.usernameLabelLocator).
                         shouldHave(Condition.text("Телефон  /  Email  /  СНИЛС")));
 
         step("Check label for login password", () ->
-                Selenide.$(loginPage.passwordLabelLocator).
+                $(loginPage.passwordLabelLocator).
                         shouldHave(Condition.text("Пароль")));
     }
 
@@ -44,12 +45,11 @@ public class LoginTests extends TestBase{
                 loginPage.enterLogInButton());
 
         step("Check successfully Log in", () ->
-                Selenide.$(mainPage.userNameLocator).shouldHave(Condition.text(mainPage.userNameText)));
+                $(mainPage.userNameLocator).shouldHave(Condition.text(mainPage.userNameText)));
     }
 
     @Test
     @Feature("LoginPage")
-    //@AllureId("5892")
     @DisplayName("Can't log in with incorrect username")
     void loginWithIncorrectUsernameTests() {
         step("Enter login name", () ->
@@ -62,12 +62,11 @@ public class LoginTests extends TestBase{
                 loginPage.enterLogInButton());
 
         step("Check successfully Log in", () ->
-                Selenide.$(loginPage.errorLogInLocator).shouldHave(Condition.text(loginPage.errorLogInText)));
+                $(loginPage.errorLogInLocator).shouldHave(Condition.text(loginPage.errorLogInText)));
     }
 
     @Test
     @Feature("LoginPage")
-    //@AllureId("5892")
     @DisplayName("Can't log in with incorrect password")
     void loginWithIncorrectPasswordTests() {
         step("Enter login name", () ->
@@ -80,7 +79,7 @@ public class LoginTests extends TestBase{
                 loginPage.enterLogInButton());
 
         step("Check successfully Log in", () ->
-                Selenide.$(loginPage.errorLogInLocator).shouldHave(Condition.text(loginPage.errorLogInText)));
+                $(loginPage.errorLogInLocator).shouldHave(Condition.text(loginPage.errorLogInText)));
     }
 
 
